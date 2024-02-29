@@ -56,5 +56,5 @@
         "temp/": true,
         "Temp/": true
     },
-    "dotnet.defaultSolution": "eesdc24.sln"
+    "dotnet.defaultSolution": "EESDC2024-TOP.sln"
 }
