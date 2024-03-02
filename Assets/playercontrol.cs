@@ -14,7 +14,8 @@ public class control : MonoBehaviour
     Vector2 distance;
     Vector2 playerpos;
     Vector2 initialpos;
-    public GameObject goal;
+    public GameObject goal_blue;
+    public GameObject goal_red;
     Rigidbody2D rb;
 
     public float maxdis=1.5f;
@@ -23,6 +24,7 @@ public class control : MonoBehaviour
     {
         rb = GetComponent<Rigidbody2D>();
         initialpos = rb.position; 
+  
     }
     private void OnMouseDown()
     {
@@ -91,7 +93,7 @@ public class control : MonoBehaviour
             rb.velocity = new Vector2( rb.velocity.x,0);
         }
 
-        if (goal.active)
+        if (goal_blue.active || goal_red.active)
         {
             transform.position = initialpos;
             rb.velocity = new Vector2(0, 0);
