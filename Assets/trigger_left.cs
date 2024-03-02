@@ -4,16 +4,16 @@ using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SocialPlatforms.Impl;
 
-public class trigger : MonoBehaviour
+public class trigger_left : MonoBehaviour
 {
     public int score = 0;
     public float wait = 1f;
     public Text score_record;
-    public GameObject goal;
+    public GameObject goal_red;
     // Start is called before the first frame update
     void Start()
     {
-        goal.SetActive(false);
+        goal_red.SetActive(false);
 
     }
 
@@ -24,17 +24,17 @@ public class trigger : MonoBehaviour
     }
     private void Reset()
     {
-        goal.SetActive(false);
+        goal_red.SetActive(false);
     }
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if(collision.tag == "football")
         {
-            Debug.Log("red team goal!");
+
             score++;
             score_record.text = "score:" + score;
             
-            goal.SetActive(true);
+            goal_red.SetActive(true);
             Invoke(nameof(Reset), wait);
         }
     }
