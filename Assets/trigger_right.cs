@@ -36,6 +36,7 @@ public class trigger_right : MonoBehaviour
 
             goal_blue.SetActive(true);
             Invoke(nameof(Reset), wait);
+            turn_control.just_scored = turn_control.BLUE;
         }
     }
 }

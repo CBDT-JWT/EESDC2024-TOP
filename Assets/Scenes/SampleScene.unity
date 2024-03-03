@@ -285,6 +285,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   maxdis: 1.5
+  goal_blue: {fileID: 488925127}
+  goal_red: {fileID: 1016475558}
 --- !u!1 &153317777
 GameObject:
   m_ObjectHideFlags: 0
@@ -447,6 +449,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   maxdis: 1.5
+  goal_blue: {fileID: 488925127}
+  goal_red: {fileID: 1016475558}
 --- !u!1 &320077311
 GameObject:
   m_ObjectHideFlags: 0
@@ -684,6 +688,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   maxdis: 1.5
+  goal_blue: {fileID: 488925127}
+  goal_red: {fileID: 1016475558}
 --- !u!1 &438789484
 GameObject:
   m_ObjectHideFlags: 0
@@ -2135,9 +2141,8 @@ GameObject:
   - component: {fileID: 1463619499}
   - component: {fileID: 1463619498}
   - component: {fileID: 1463619497}
-  - component: {fileID: 1463619500}
+  - component: {fileID: 1463619502}
   - component: {fileID: 1463619496}
-  - component: {fileID: 1463619501}
   m_Layer: 0
   m_Name: ball_01
   m_TagString: football
@@ -2274,20 +2279,7 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1463619500
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1463619495}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 82d710d870d932845a0cd50384e0702a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  maxdis: 0
---- !u!114 &1463619501
+--- !u!114 &1463619502
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -2299,7 +2291,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5b05f3954c27ac74db3493775e8b766e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  goal: {fileID: 0}
+  goal_blue: {fileID: 488925127}
+  goal_red: {fileID: 1016475558}
 --- !u!1 &1485990811
 GameObject:
   m_ObjectHideFlags: 0
@@ -2463,6 +2456,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   maxdis: 1.5
+  goal_blue: {fileID: 0}
+  goal_red: {fileID: 0}
 --- !u!114 &1485990817
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2476,6 +2471,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   maxdis: 1.5
+  goal_blue: {fileID: 488925127}
+  goal_red: {fileID: 1016475558}
 --- !u!1 &1512168289
 GameObject:
   m_ObjectHideFlags: 0
@@ -2785,6 +2782,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   maxdis: 1.5
+  goal_blue: {fileID: 488925127}
+  goal_red: {fileID: 1016475558}
 --- !u!1 &1666834615
 GameObject:
   m_ObjectHideFlags: 0
@@ -3101,6 +3100,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   maxdis: 1.5
+  goal_blue: {fileID: 488925127}
+  goal_red: {fileID: 1016475558}
 --- !u!1 &2007529633
 GameObject:
   m_ObjectHideFlags: 0

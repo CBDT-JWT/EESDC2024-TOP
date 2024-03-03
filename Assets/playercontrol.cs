@@ -9,7 +9,7 @@ using static UnityEditor.PlayerSettings;
 
 public class control : MonoBehaviour
 {   
-    private float speedquotient = 12.47f;//i love 47!
+    private float speedquotient = 12.47f;//i love 47! excuse me?
     private bool isclick = false;
     private bool starteddraw = false;
     Vector2 mousepos;
@@ -21,6 +21,8 @@ public class control : MonoBehaviour
     private int side;
     private int num;
     public float maxdis = 1.5f;
+    public GameObject goal_blue;
+    public GameObject goal_red;
     // Start is called before the first frame update
     void Start()
     {
@@ -88,7 +90,7 @@ public class control : MonoBehaviour
             rb.velocity = new Vector2(0, 0);
         }
         mousepos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-        if (turn_control.status == side&&turn_control.canplay)//判断是否是自己的回合
+        if (turn_control.status == side && turn_control.canplay)//判断是否是自己的回合
         {
             if (!isclick)
             {   
@@ -139,7 +141,21 @@ public class control : MonoBehaviour
         //TODO:下面的代码实现人物飞出场景之后立刻传送回初始位置
 
         //下面的代码用来实现得分后传送到初始位置
-       
+        //判断机制：只要出现某方进球的ui就传送回去
+        if (goal_blue.active )
+        {
+            transform.position = initialpos;
+            rb.velocity = new Vector2(0, 0);
+            turn_control.isstatic[num, (side + 1) / 2] = true;
+
+
+        }
+        if (goal_red.active)
+        {
+            transform.position = initialpos;
+            rb.velocity = new Vector2(0, 0);
+            turn_control.isstatic[num, (side + 1) / 2] = true;
+        }
 
 
     }

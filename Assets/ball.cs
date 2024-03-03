@@ -5,8 +5,9 @@ using UnityEngine;
 public class NewBehaviourScript : MonoBehaviour
 {
     Vector2 initialpos;
-    public GameObject goal;
     Rigidbody2D rb;
+    public GameObject goal_blue;
+    public GameObject goal_red;
     // Start is called before the first frame update
     void Start()
     {
@@ -43,6 +44,15 @@ public class NewBehaviourScript : MonoBehaviour
         }else{
             //Debug.Log("ball is not static");
             turn_control.isstatic[0,0] = false;
+        } 
+        //复位
+        if (goal_blue.active || goal_red.active)
+        {
+            transform.position = initialpos;
+            rb.velocity = new Vector2(0, 0);
+
         }
     }
+   
+
 }
