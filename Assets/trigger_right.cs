@@ -30,7 +30,7 @@ public class trigger_right : MonoBehaviour
     {
         if (collision.tag == "football")
         {
-
+            turn_control.status = turn_control.NONE;
             score++;
             score_record.text = "score:" + score;
 

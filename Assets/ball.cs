@@ -10,17 +10,39 @@ public class NewBehaviourScript : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        initialpos =rb.position;
         rb = GetComponent<Rigidbody2D>();
+        initialpos =rb.position;
+        
     }
 
     // Update is called once per frame
     void Update()
-    {
-        if (goal.active)
-        {
+    {   
+        //下面的代码用来在进球后重置球的位置和速度
+        if (turn_control.status==turn_control.NONE)
+        {   
+            Debug.Log("reset");
             transform.position = initialpos;
             rb.velocity = new Vector2(0, 0);
+            turn_control.checkok = false;
+            
+        }
+        //下面的代码用来防止超低速运动
+        if(rb.velocity.x < 0.3 && rb.velocity.x > -0.3)
+        {
+            rb.velocity= new Vector2(0,rb.velocity.y);
+        }
+        if (rb.velocity.y < 0.3 && rb.velocity.y > -0.3)
+        {
+            rb.velocity = new Vector2( rb.velocity.x,0);
+        }
+        //TODO:下面的代码实现回合转换
+        if (rb.velocity.x < 0.3 && rb.velocity.x > -0.3 && rb.velocity.y < 0.3 && rb.velocity.y > -0.3){
+            //Debug.Log("ball is static");
+            turn_control.isstatic[0,0] = true;
+        }else{
+            //Debug.Log("ball is not static");
+            turn_control.isstatic[0,0] = false;
         }
     }
 }

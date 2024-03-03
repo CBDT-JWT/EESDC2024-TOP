@@ -14,7 +14,7 @@ public class timetest : MonoBehaviour
 
     private Text TimeText;
     public float times = 60;
-    private int s;//¶¨ÒåÒ»¸öÃë
+    private int s;//ï¿½ï¿½ï¿½ï¿½Ò»ï¿½ï¿½ï¿½ï¿½
     public GameObject win;
     public GameObject lose;
     public GameObject[] star;
@@ -38,9 +38,9 @@ public class timetest : MonoBehaviour
 
     void Update()
     {
-        //¼ÆÊ±Æ÷Íê³Éµ¹¼ÆÊ±µÄ¹¦ÄÜ
+        //ï¿½ï¿½Ê±ï¿½ï¿½ï¿½ï¿½Éµï¿½ï¿½ï¿½Ê±ï¿½Ä¹ï¿½ï¿½ï¿½
         times -= Time.deltaTime;
-        s = (int)times % 60; //Ð¡Êý×ªÕûÊý 
+        s = (int)times % 60; //Ð¡ï¿½ï¿½×ªï¿½ï¿½ï¿½ï¿½ 
         TimeText.text = s.ToString();
         if (trigger_right.score ==3 || trigger_left.score == 3)
         {
@@ -94,7 +94,7 @@ public class timetest : MonoBehaviour
                 star[4].SetActive(true);
                 star[5].SetActive(true);
 
-                //ÅÐ¶¨µ¹¼ÆÊ±½áÊøÊ±¸Ã×öÊ²Ã´
+                //ï¿½Ð¶ï¿½ï¿½ï¿½ï¿½ï¿½Ê±ï¿½ï¿½ï¿½ï¿½Ê±ï¿½ï¿½ï¿½ï¿½Ê²Ã´
             }
         }
         }

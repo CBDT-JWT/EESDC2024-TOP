@@ -26,16 +26,17 @@ public class trigger_left : MonoBehaviour
     {
         goal_red.SetActive(false);
     }
+
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if(collision.tag == "football")
         {
-
+            turn_control.status = turn_control.NONE;
             score++;
             score_record.text = "score:" + score;
-            
             goal_red.SetActive(true);
             Invoke(nameof(Reset), wait);
+            turn_control.just_scored = turn_control.RED;
         }
     }
 }
