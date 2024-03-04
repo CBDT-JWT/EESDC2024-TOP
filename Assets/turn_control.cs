@@ -9,51 +9,42 @@ public class turn_control : MonoBehaviour
     public const int RED = 1 ;
     public const int BLUE = -1 ;
     public const int NONE = 0 ;
-    public static int status =0 ;
-    public static int just_scored = 0;
-    public static bool checkok = false ;
-    public static bool canplay = false ;
+    public static int status =0 ;//分别取值为RED,BLUE,NONE，表示红方回合、蓝方回合、无回合。
+    public static int just_scored = 0;//分别取值为RED,BLUE,表示红方进球、蓝方进球。
+    public static bool checkok = false ;//为true时执行交换回合的检测
+    public static bool canplay = false ;//为true时允许玩家操作，为false时双方都不能操作
     void Start()
     {   
-        isstatic[0,1] = true;
-        status = RED;
-        canplay = true;
+        isstatic[0,1] = true;//我不知道这行是干什么的，但是删掉就他妈不能交替回合了。
+        status = RED;//红方先手
+        canplay = true;//红方先手
         //Debug.Log(status);
     }
 
     // Update is called once per frame
     void Update()
     {   
-        Debug.Log(status);
         if (status != NONE&&checkok)//比赛过程中，如果所有球员和球静止，则切换回合。
         {
             
-            bool flag = true;
+            bool flag = true;//检查所有对象是否静止
             for (int i = 0; i <= 3; i++)
             {
                 for (int j = 0; j <= 1; j++)
                 {
-                    flag = flag && isstatic[i,j];
-                    if(!isstatic[i,j]){
-                        //Debug.Log(i*10+j);
-                }
+                    flag = flag && isstatic[i,j];//检查[i,j]对象是否静止
             }
-            Debug.Log(flag);
-            if(!isstatic[0,0]){
-                Debug.Log("ball");
-            
-            }
-        }//未知问题
-        if (flag)
-            {Debug.Log("check!");
-                status = -status;
-                checkok = false;
-                canplay = true;
+        }
+        if (flag)//所有对象都静止，交替回合
+            {
+                status = -status;//交替球权
+                checkok = false;//不再检查
+                canplay = true;//允许玩家操作
             }
     }
-    if(status == NONE&&just_scored!=NONE){
-        status = -just_scored;
-        just_scored= NONE;
+    if(status == NONE&&just_scored!=NONE){//进球且已经执行了trigger_left.cs或trigger_right.cs中的代码且尚未交替球权
+        status = -just_scored;//交替球权
+        just_scored= NONE;//重置just_scored
     }
 }
 }

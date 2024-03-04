@@ -81,19 +81,15 @@ public class control : MonoBehaviour
 
 
     // }
+    public void get_acc_from_scroller(){//
 
-    void Update()
-    {   
-        if (turn_control.status==turn_control.NONE)
-        {
-            transform.position = initialpos;
-            rb.velocity = new Vector2(0, 0);
-        }
-        mousepos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-        if (turn_control.status == side && turn_control.canplay)//判断是否是自己的回合
-        {
+    }
+    public void drag(float v = -1f, float angle = 0f, float acc = 0f){//操作人物的函数,做成接口方便ai调用
+        if(v <0){//默认参数，表示人在操作。这里为引入人机对战做准备
             if (!isclick)
             {   
+                Debug.Log("!isclick"+side.ToString()+" "+num.ToString());
+                //这里是为了调试
                 if(starteddraw){//开始之后不在按压状态说明是释放
                     starteddraw = false;
                     rb.velocity = -(rb.position - playerpos)*speedquotient;
@@ -104,22 +100,33 @@ public class control : MonoBehaviour
                 
             }
             if (isclick)
-            {
+            {   Debug.Log("isclick"+side.ToString()+" "+num.ToString());
                 Vector2 pos = (mousepos - playerpos).normalized * maxdis;
                 transform.position = mousepos + distance;
                 if (Vector2.Distance(transform.position, playerpos) > maxdis)
                 {
                     transform.position = pos + playerpos;
                 }
-                //draw();
-                //
                 starteddraw = true;
-                //turn_control.status = -turn_control.status;
-
             }
+            return;
+    }
+    rb.velocity = new Vector2(v * Mathf.Cos(angle), v * Mathf.Sin(angle));//这里是ai操作的接口，没写完。ai可以通过player.drag()操作人物。后续需要把前摇模拟出来。
+    return;
+}
+    void Update()
+    {   
+        if (turn_control.status == -side)playerpos = transform.position;//初始化playerpos，可能会解决上一回合不松开鼠标造成闪现的bug
+        if (turn_control.status==turn_control.NONE)
+        {
+            transform.position = initialpos;
+            rb.velocity = new Vector2(0, 0);
         }
-
-
+        mousepos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+        if (turn_control.status == side && turn_control.canplay)//判断是否是自己的回合且没有操作过
+        {
+            drag();
+        }
         //下面的代码用来防止超低速运动
         if (rb.velocity.x < 0.3 && rb.velocity.x > -0.3)
         {
@@ -133,30 +140,18 @@ public class control : MonoBehaviour
         if (rb.velocity.x < 0.3 && rb.velocity.x > -0.3 && rb.velocity.y < 0.3 && rb.velocity.y > -0.3) {
             turn_control.isstatic[num,(side+1)/2] = true;
             //Debug.Log("player is static");
-        } else {
-           
+        } else {          
             turn_control.isstatic[num,(side+1)/2] = false;
             //Debug.Log("player is not static");
         }
         //TODO:下面的代码实现人物飞出场景之后立刻传送回初始位置
-
         //下面的代码用来实现得分后传送到初始位置
         //判断机制：只要出现某方进球的ui就传送回去
-        if (goal_blue.active )
-        {
-            transform.position = initialpos;
-            rb.velocity = new Vector2(0, 0);
-            turn_control.isstatic[num, (side + 1) / 2] = true;
-
-
-        }
-        if (goal_red.active)
+        if(GameObject.Find("goal_blue")!=null || GameObject.Find("goal_red")!=null)
         {
             transform.position = initialpos;
             rb.velocity = new Vector2(0, 0);
             turn_control.isstatic[num, (side + 1) / 2] = true;
         }
-
-
     }
 }

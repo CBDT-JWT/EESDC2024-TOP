@@ -40,17 +40,17 @@ public class NewBehaviourScript : MonoBehaviour
         //TODO:下面的代码实现回合转换
         if (rb.velocity.x < 0.3 && rb.velocity.x > -0.3 && rb.velocity.y < 0.3 && rb.velocity.y > -0.3){
             //Debug.Log("ball is static");
-            turn_control.isstatic[0,0] = true;
+            turn_control.isstatic[0,0] = true;//球静止
         }else{
             //Debug.Log("ball is not static");
-            turn_control.isstatic[0,0] = false;
+            turn_control.isstatic[0,0] = false;//球运动
         } 
         //复位
-        if (goal_blue.active || goal_red.active)
+        //if (goal_blue.active || goal_red.active)
+        if(GameObject.Find("goal_blue")!=null || GameObject.Find("goal_red")!=null)
         {
             transform.position = initialpos;
             rb.velocity = new Vector2(0, 0);
-
         }
     }
    
