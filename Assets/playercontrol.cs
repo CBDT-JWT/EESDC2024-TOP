@@ -145,7 +145,13 @@ public class control : MonoBehaviour
             //Debug.Log("player is not static");
         }
         //TODO:下面的代码实现人物飞出场景之后立刻传送回初始位置
-        //下面的代码用来实现得分后传送到初始位置
+
+        if(transform.position.x>turn_control.borders.x||transform.position.x<-turn_control.borders.x||transform.position.y>turn_control.borders.y||transform.position.y<-turn_control.borders.y)
+        {
+            transform.position = initialpos;
+            rb.velocity = new Vector2(0, 0);
+            turn_control.isstatic[num, (side + 1) / 2] = true;
+        }
         //判断机制：只要出现某方进球的ui就传送回去
         if(GameObject.Find("goal_blue")!=null || GameObject.Find("goal_red")!=null)
         {

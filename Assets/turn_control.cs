@@ -13,6 +13,7 @@ public class turn_control : MonoBehaviour
     public static int just_scored = 0;//分别取值为RED,BLUE,表示红方进球、蓝方进球。
     public static bool checkok = false ;//为true时执行交换回合的检测
     public static bool canplay = false ;//为true时允许玩家操作，为false时双方都不能操作
+    public static Vector2 borders = new Vector2(13f, 6.5f);//场地边界
     void Start()
     {   
         isstatic[0,1] = true;//我不知道这行是干什么的，但是删掉就他妈不能交替回合了。
