@@ -17,6 +17,7 @@ public class timetest : MonoBehaviour
     private int s;//����һ����
     public GameObject win;
     public GameObject lose;
+    public GameObject draw;
     public GameObject[] star;
     public trigger_right trigger_right;
     public trigger_left trigger_left;
@@ -26,6 +27,7 @@ public class timetest : MonoBehaviour
         TimeText = GameObject.Find("TimeText").GetComponent<Text>();
         win.SetActive(false);
         lose.SetActive(false);
+        draw.SetActive(false);
         star[0].SetActive(false);
         star[1].SetActive(false);
         star[2].SetActive(false);
@@ -50,13 +52,17 @@ public class timetest : MonoBehaviour
         {
            
 
-            if (trigger_left.score >= trigger_right.score)
+            if (trigger_left.score > trigger_right.score)
             {
                 lose.SetActive(true);
             }
             if (trigger_left.score < trigger_right.score)
             {
                 win.SetActive(true);
+            }
+            if (trigger_left.score == trigger_right.score)
+            {
+                draw.SetActive(true);
             }
             if (trigger_right.score == 1)
             {
