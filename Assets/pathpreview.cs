@@ -28,7 +28,7 @@ public class pathpreview : MonoBehaviour
         }
         
         if (acc<-1f){
-             rb.velocity += new Vector2(+rb.velocity.y, rb.velocity.x) * Time.deltaTime * acc * control.acc_quotient;
+             rb.velocity += new Vector2(-rb.velocity.y, rb.velocity.x) * Time.deltaTime * acc * control.acc_quotient;
             acc += control.delta_acc;
         }
         

@@ -10,10 +10,10 @@ using static UnityEditor.PlayerSettings;
 public class control : MonoBehaviour
 {
     public GameObject _pathpreview;
-    private float speedquotient = 12.47f;//i love 47! excuse me?
+    private float speedquotient = 20.47f;//i love 47! excuse me?
     private bool isclick = false;
-    public const float acc_quotient = 1f;
-    public const float delta_acc = 0.4f;
+    public const float acc_quotient = 1.5f;
+    public const float delta_acc = 0.2f;
     private bool starteddraw = false;
     Vector2 mousepos;
     Vector2 distance;
@@ -178,7 +178,7 @@ public class control : MonoBehaviour
             acc -= delta_acc;
         }
         if (acc<-1f){
-             rb.velocity += new Vector2(+rb.velocity.y, rb.velocity.x) * Time.deltaTime * acc * acc_quotient;
+             rb.velocity += new Vector2(-rb.velocity.y, rb.velocity.x) * Time.deltaTime * acc * acc_quotient;
             acc += delta_acc;
         }
         //下面的代码实现回合转换
