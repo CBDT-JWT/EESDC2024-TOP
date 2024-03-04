@@ -10,11 +10,10 @@ using static UnityEditor.PlayerSettings;
 public class control : MonoBehaviour
 {
     public GameObject _pathpreview;
-
     private float speedquotient = 12.47f;//i love 47! excuse me?
     private bool isclick = false;
     public const float acc_quotient = 1f;
-    public const float delta_acc = 0.2f;
+    public const float delta_acc = 0.4f;
     private bool starteddraw = false;
     Vector2 mousepos;
     Vector2 distance;
@@ -24,6 +23,7 @@ public class control : MonoBehaviour
     Rigidbody2D rb;
     private int side;
     private int num;
+    private float shoot_timer = 0f;
     public float maxdis = 1.5f;
     public GameObject goal_blue;
     public GameObject goal_red;
@@ -55,11 +55,12 @@ public class control : MonoBehaviour
         //Debug.Log(side*num);
     }
     void shoot(float vx, float vy, float acc)
-    {
-        Instantiate(_pathpreview, transform.position, Quaternion.identity);
+    {   
+        GameObject path = Instantiate(_pathpreview, transform.position, Quaternion.identity);
         pathpreview.vx = vx;
         pathpreview.vy = vy;
         pathpreview.acc = acc;
+        Destroy(path,0.2f);
         //_pathpreview
     }
     private void OnMouseDown()
@@ -132,7 +133,12 @@ public class control : MonoBehaviour
                 }
                 float vx = (-(rb.position - playerpos) * speedquotient).x;
                 float vy = (-(rb.position - playerpos) * speedquotient).y;
-                shoot(vx,vy,acc_init);
+                
+                if(shoot_timer>0.03f){
+                    shoot_timer = 0f;
+                    shoot(vx,vy,acc_init);
+                }
+                shoot_timer += Time.deltaTime;
                 starteddraw = true;
             }
             acc = acc_init;
@@ -146,7 +152,8 @@ public class control : MonoBehaviour
         return;
     }
     void Update()
-    {
+    {   
+        // 跑出去了就传送回去
         if (transform.position.x > turn_control.borders.x || transform.position.x < -turn_control.borders.x || transform.position.y > turn_control.borders.y || transform.position.y < -turn_control.borders.y)
         {
             transform.position = initialpos;
@@ -191,9 +198,12 @@ public class control : MonoBehaviour
             turn_control.isstatic[num, (side + 1) / 2] = false;
             //Debug.Log("player is not static");
         }
+        //判断机制：球员与门碰撞后传送回去
+        
         //判断机制：只要出现某方进球的ui就传送回去
         if (GameObject.Find("goal_blue") != null || GameObject.Find("goal_red") != null)
-        {
+        {   
+
             transform.position = initialpos;
             rb.velocity = new Vector2(0, 0);
             turn_control.isstatic[num, (side + 1) / 2] = true;
