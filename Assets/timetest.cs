@@ -13,7 +13,7 @@ public class timetest : MonoBehaviour
     // Start is called before the first frame update
 
     private Text TimeText;
-    public float times = 60;
+    public float times = 300;
     private int s;//����һ����
     public GameObject win;
     public GameObject lose;
@@ -38,7 +38,7 @@ public class timetest : MonoBehaviour
 
     void Update()
     {
-        //��ʱ����ɵ���ʱ�Ĺ���
+        //��ʱ����ɵ���ʱ�Ĺ��ￄ1�7
         times -= Time.deltaTime;
         s = (int)times % 60; //С��ת���� 
         TimeText.text = s.ToString();
