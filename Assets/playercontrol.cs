@@ -26,7 +26,7 @@ public class control : MonoBehaviour
     public float acc = 0f;
     private float _acc = 0f;
     private float shoot_timer = 0f;
-    public float maxdis = 1.5f;
+    public float maxdis = 15f;
     public GameObject goal_blue;
     public GameObject goal_red;
     // Start is called before the first frame update
