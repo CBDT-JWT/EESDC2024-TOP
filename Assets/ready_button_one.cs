@@ -5,23 +5,28 @@ using UnityEngine.UI;
 
 public class ready_button_one : MonoBehaviour
 {
-    public bool ready=false;
+    public static bool ready=false;
     
     private Sprite newSprite;
-    private Spriterenderer sprenderer;
+    private Button btn;
+    public Image image;
+
 
     // Start is called before the first frame update
     void Start()
     {
-        sprenderer = GetComponent<SpriteRenderer>();
+        image = GetComponent<Image>();
         btn = GetComponent<Button>();
         btn.onClick.AddListener(OnButtonClick);
+        newSprite = (Sprite)Resources.Load("prepared", typeof(Sprite));
     }
 
     private void OnButtonClick(){
         if(!ready){
-            sprenderer
             ready = true;
+            Debug.Log("the first player is ready!");
+            image.sprite = newSprite;
+            btn.interactable = false;
         }
     }
 

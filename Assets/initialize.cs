@@ -11,13 +11,14 @@ public class initialize : MonoBehaviour
     public List <int> formations_two = new List<int>();
     void Awake()
     {
-        getinfo("asset_playerone.id", ref players_one, ref formations_one);
-        getinfo("asset_playertwo.id", ref players_two, ref formations_two);
+        getinfo("asset_playerone.id", "property", ref players_one, ref formations_one);
+        getinfo("asset_playertwo.id", "property", ref players_two, ref formations_two);
         int countplayers1=players_one.Count;
         int countplayers2=players_two.Count;
-        generatebench();
+        Debug.Log(countplayers1);
+        //generatebench();
     }
-    public string getfileline(string path, int num){
+    public static string getfileline(string path, int num){
         string str;
         using (StreamReader rder = new StreamReader(path)){
             for(int i=0;i<num-1;i++){
@@ -27,7 +28,8 @@ public class initialize : MonoBehaviour
         }
         return str;
     }
-    public void getinfo(string path, ref List<int>players, ref List<int>formations){
+    private void getinfo(string filename, string folder, ref List<int>players, ref List<int>formations){
+        string path = Path.Combine(Application.dataPath, folder, filename);
         if(File.Exists(path))
         {
             using (StreamReader reader = new StreamReader(path))
@@ -53,10 +55,12 @@ public class initialize : MonoBehaviour
                     }
                 }
             }
+        }else{
+            Debug.Log("no path:"+path);
         }
     }
 }
-public class football_player
+/*public class football_player
 {
     private int strength=0;
     private int speed=0;
@@ -89,3 +93,4 @@ public class football_player
 
     }
 }
+*/
