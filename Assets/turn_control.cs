@@ -13,7 +13,7 @@ public class turn_control : MonoBehaviour
     public static int just_scored = 0;//分别取值为RED,BLUE,表示红方进球、蓝方进球。
     public static bool checkok = false ;//为true时执行交换回合的检测
     public static bool canplay = false ;//为true时允许玩家操作，为false时双方都不能操作
-    public static Vector2 borders = new Vector2(13f, 6.5f);//场地边界
+    public static Vector2 borders = new Vector2(960f, 540f);//场地边界
     void Start()
     {   
         isstatic[0,1] = true;//我不知道这行是干什么的，但是删掉就他妈不能交替回合了。
@@ -29,14 +29,15 @@ public class turn_control : MonoBehaviour
         {
             
             bool flag = true;//检查所有对象是否静止
-            for (int i = 0; i <= 3; i++)
-            {
-                for (int j = 0; j <= 1; j++)
-                {
-                    flag = flag && isstatic[i,j];//检查[i,j]对象是否静止
-            }
-        }
-        if (flag)//所有对象都静止，交替回合
+            // for (int i = 0; i <= 3; i++)
+            // {
+            //     for (int j = 0; j <= 1; j++)
+            //     {
+            //         flag = flag && isstatic[i,j];//检查[i,j]对象是否静止
+            // }
+            flag = flag && isstatic[0,0];//检查球是否静止
+        
+        if (flag)//所有对象都静止，交替回合//我改成球静止了
             {
                 status = -status;//交替球权
                 checkok = false;//不再检查
@@ -45,7 +46,7 @@ public class turn_control : MonoBehaviour
     }
     if(status == NONE&&just_scored!=NONE){//进球且已经执行了trigger_left.cs或trigger_right.cs中的代码且尚未交替球权
         status = -just_scored;//交替球权
-        just_scored= NONE;//重置just_scored
+        just_scored = NONE;//重置just_scored
     }
 }
 }
