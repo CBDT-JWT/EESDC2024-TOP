@@ -62,7 +62,7 @@ public class control : MonoBehaviour
         script.vx = vx;
         script.vy = vy;
         script.acc = __acc;
-        Destroy(path,0.2f);
+        Destroy(path,0.35f);
     }
     private void OnMouseDown()
     {
