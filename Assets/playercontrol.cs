@@ -10,10 +10,10 @@ using static UnityEditor.PlayerSettings;
 public class control : MonoBehaviour
 {
     public GameObject _pathpreview;
-    private float speedquotient = 20.47f;//i love 47! excuse me?
+    private float speedquotient = 147.47f;//i love 47! excuse me?
     private bool isclick = false;
-    public const float acc_quotient = 1.5f;
-    public const float delta_acc = 0.2f;
+    public const float acc_quotient =3f;
+    public const float delta_acc = 0.3f;
     private bool starteddraw = false;
     Vector2 mousepos;
     Vector2 distance;
@@ -26,7 +26,7 @@ public class control : MonoBehaviour
     public float acc = 0f;
     private float _acc = 0f;
     private float shoot_timer = 0f;
-    public float maxdis = 15f;
+    public float maxdis = 100f;
     public GameObject goal_blue;
     public GameObject goal_red;
     // Start is called before the first frame update
@@ -62,7 +62,7 @@ public class control : MonoBehaviour
         script.vx = vx;
         script.vy = vy;
         script.acc = __acc;
-        Destroy(path,0.35f);
+        Destroy(path,0.2f);
     }
     private void OnMouseDown()
     {
@@ -75,10 +75,7 @@ public class control : MonoBehaviour
         isclick = false;
     }
 
-    public void get_acc_from_scroller()
-    {//
 
-    }
     
     public void drag(bool is_ai = false, float v = -1f, float angle = 0f, float acc_init = 0f)
     {//操作人物的函数,做成接口方便ai调用
@@ -145,7 +142,7 @@ public class control : MonoBehaviour
     {    
         //Debug.Log(Input.GetAxis("Mouse ScrollWheel"));
         // 跑出去了就传送回去
-        if (transform.position.x > turn_control.borders.x || transform.position.x < -turn_control.borders.x || transform.position.y > turn_control.borders.y || transform.position.y < -turn_control.borders.y)
+        if (rb.position.x > turn_control.borders.x || rb.position.x < -turn_control.borders.x || rb.position.y > turn_control.borders.y || rb.position.y < -turn_control.borders.y)
         {
             transform.position = initialpos;
             rb.velocity = new Vector2(0, 0);
@@ -163,26 +160,26 @@ public class control : MonoBehaviour
             drag();
         }
         //下面的代码用来防止超低速运动
-        if (rb.velocity.x < 0.3 && rb.velocity.x > -0.3)
+        if (rb.velocity.x < 30 && rb.velocity.x > -30)
         {
             rb.velocity = new Vector2(0, rb.velocity.y);
         }
-        if (rb.velocity.y < 0.3 && rb.velocity.y > -0.3)
+        if (rb.velocity.y < 30 && rb.velocity.y > -30)
         {
             rb.velocity = new Vector2(rb.velocity.x, 0);
         }
 
-        if (acc > 1f)
+        if (acc > 0.5f)
         {               
             rb.velocity += new Vector2(-rb.velocity.y, rb.velocity.x) * Time.deltaTime * acc * acc_quotient;
-            acc -= delta_acc;
+            acc -= delta_acc*Time.deltaTime;
         }
-        if (acc<-1f){
+        if (acc<-0.5f){
              rb.velocity += new Vector2(-rb.velocity.y, rb.velocity.x) * Time.deltaTime * acc * acc_quotient;
-            acc += delta_acc;
+            acc += delta_acc*Time.deltaTime;
         }
         //下面的代码实现回合转换
-        if (rb.velocity.x < 0.3 && rb.velocity.x > -0.3 && rb.velocity.y < 0.3 && rb.velocity.y > -0.3)
+        if (rb.velocity.x < 30 && rb.velocity.x > -30 && rb.velocity.y < 30 && rb.velocity.y > -30)
         {
             turn_control.isstatic[num, (side + 1) / 2] = true;
             //Debug.Log("player is static");

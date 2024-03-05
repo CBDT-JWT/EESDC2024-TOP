@@ -21,15 +21,15 @@ public class pathpreview : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (acc > 1f)
+        if (acc > 0.5f)
         {
             rb.velocity += new Vector2(-rb.velocity.y, rb.velocity.x) * Time.deltaTime * acc * control.acc_quotient;
-            acc -= control.delta_acc;
+            acc -= control.delta_acc*Time.deltaTime;
         }
         
-        if (acc<-1f){
+        if (acc<- 0.5f){
              rb.velocity += new Vector2(-rb.velocity.y, rb.velocity.x) * Time.deltaTime * acc * control.acc_quotient;
-            acc += control.delta_acc;
+            acc += control.delta_acc*Time.deltaTime;
         }
         
     }
