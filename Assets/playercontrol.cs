@@ -10,10 +10,10 @@ using static UnityEditor.PlayerSettings;
 public class control : MonoBehaviour
 {
     public GameObject _pathpreview;
-    private float speedquotient = 12.47f;//i love 47! excuse me?
+    private float speedquotient = 124.7f;//i love 47! excuse me?
     private bool isclick = false;
     public const float acc_quotient = 1f;
-    public const float delta_acc = 0.4f;
+    public const float delta_acc = 4f;
     private bool starteddraw = false;
     Vector2 mousepos;
     Vector2 distance;
@@ -26,7 +26,7 @@ public class control : MonoBehaviour
     public float acc = 0f;
     private float _acc = 0f;
     private float shoot_timer = 0f;
-    public float maxdis = 1.5f;
+    public float maxdis = 15f;
     public GameObject goal_blue;
     public GameObject goal_red;
     // Start is called before the first frame update
