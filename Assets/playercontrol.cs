@@ -26,7 +26,8 @@ public class control : MonoBehaviour
     public float acc = 0f;
     private float _acc = 0f;
     private float shoot_timer = 0f;
-    public float maxdis = 100f;
+    public  const float maxdis = 80f;
+    public  const float mindis = 15f;
     public GameObject goal_blue;
     public GameObject goal_red;
     // Start is called before the first frame update
@@ -53,9 +54,9 @@ public class control : MonoBehaviour
         else
         {
             num = 1;
-        }
+        }//TODO：获取球员编号和所在队伍的代码，需要重新写，等待json接口。写完之后isstatic数组也要改。
     }
-    void shoot(float vx, float vy, float __acc)//这个没问题了
+    void aim(float vx, float vy, float __acc)//这个没问题了
     {   
         GameObject path = Instantiate(_pathpreview, transform.position, Quaternion.identity);
         pathpreview script= path.GetComponent<pathpreview>();
@@ -88,7 +89,7 @@ public class control : MonoBehaviour
                 
                 //Debug.Log("!isclick" + side.ToString() + " " + num.ToString());
                 //这里是为了调试
-                if (starteddraw)
+                if (starteddraw&&(rb.position-playerpos).sqrMagnitude>mindis*mindis)
                 {//开始之后不在按压状态说明是释放
                 
                     acc = _acc;
@@ -100,7 +101,11 @@ public class control : MonoBehaviour
                     turn_control.canplay = false;
                     return;
                 }
-
+                if( starteddraw&&(rb.position-playerpos).sqrMagnitude<mindis*mindis)
+                {//悔棋功能
+                    transform.position = playerpos;
+                    starteddraw = false;
+                }
                 playerpos = new Vector2(transform.position.x, transform.position.y);
 
             }
@@ -122,7 +127,8 @@ public class control : MonoBehaviour
                
                 if(shoot_timer>0.1f){
                     shoot_timer = 0f;
-                    shoot(vx,vy,_acc);//
+                    if((rb.position - playerpos).sqrMagnitude>mindis*mindis)
+                        aim(vx,vy,_acc);
                     
                 }
                 shoot_timer += Time.deltaTime;
@@ -190,8 +196,6 @@ public class control : MonoBehaviour
             turn_control.isstatic[num, (side + 1) / 2] = false;
             //Debug.Log("player is not static");
         }
-        //判断机制：球员与门碰撞后传送回去
-        
         //判断机制：只要出现某方进球的ui就传送回去
         if (GameObject.Find("goal_blue") != null || GameObject.Find("goal_red") != null)
         {   

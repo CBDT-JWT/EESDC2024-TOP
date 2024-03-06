@@ -4,6 +4,8 @@ using UnityEngine;
 public class turn_control : MonoBehaviour
 {
     // Start is called before the first frame update
+    public GameObject red_arrow ;
+    public GameObject blue_arrow;
     public static bool [,]isstatic = new bool [4,2];//表示每个对象是否静止。[0][0]表示球，[i][j]表示j方第i个球员，0表示运动。
     
     public const int RED = 1 ;
@@ -19,6 +21,8 @@ public class turn_control : MonoBehaviour
         isstatic[0,1] = true;//我不知道这行是干什么的，但是删掉就他妈不能交替回合了。
         status = RED;//红方先手
         canplay = true;//红方先手
+        red_arrow = GameObject.Find("red_arrow");
+        blue_arrow = GameObject.Find("blue_arrow");
         //Debug.Log(status);
     }
 
@@ -43,6 +47,18 @@ public class turn_control : MonoBehaviour
                 checkok = false;//不再检查
                 canplay = true;//允许玩家操作
             }
+    }
+    if(status == RED){
+        red_arrow.SetActive(true);
+        blue_arrow.SetActive(false);
+    }
+    if(status == BLUE){
+        red_arrow.SetActive(false);
+        blue_arrow.SetActive(true);
+    }
+    if(status ==NONE){
+        red_arrow.SetActive(false);
+        blue_arrow.SetActive(false);
     }
     if(status == NONE&&just_scored!=NONE){//进球且已经执行了trigger_left.cs或trigger_right.cs中的代码且尚未交替球权
         status = -just_scored;//交替球权
