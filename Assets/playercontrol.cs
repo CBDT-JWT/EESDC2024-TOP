@@ -54,7 +54,7 @@ public class control : MonoBehaviour
         else
         {
             num = 1;
-        }//TODO：获取球员编号和所在队伍的代码，需要重新写，等待json接口。写完之后isstatic数组也要改。
+        }//TODO：获取球员编号和所在队伍的代码，本来按照3v3写的,改成5v5后需要重新写，等待json接口。写完之后isstatic数组也要改。
     }
     void aim(float vx, float vy, float __acc)//这个没问题了
     {   
@@ -184,7 +184,7 @@ public class control : MonoBehaviour
              rb.velocity += new Vector2(-rb.velocity.y, rb.velocity.x) * Time.deltaTime * acc * acc_quotient;
             acc += delta_acc*Time.deltaTime;
         }
-        //下面的代码实现回合转换
+        //下面的代码实现回合转换 TODO:按照3v3写的,改成5v5之后需要改
         if (rb.velocity.x < 30 && rb.velocity.x > -30 && rb.velocity.y < 30 && rb.velocity.y > -30)
         {
             turn_control.isstatic[num, (side + 1) / 2] = true;
