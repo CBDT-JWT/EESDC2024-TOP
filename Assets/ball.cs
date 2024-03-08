@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class NewBehaviourScript : MonoBehaviour
 {
+    
     Vector2 initialpos;
     Rigidbody2D rb;
     public GameObject goal_blue;

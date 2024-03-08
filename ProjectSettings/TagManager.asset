@@ -6,6 +6,8 @@ TagManager:
   tags:
   - football
   - trigger
+  - red hole
+  - blue hole
   layers:
   - Default
   - TransparentFX
