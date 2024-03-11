@@ -8,6 +8,7 @@ TagManager:
   - trigger
   - red hole
   - blue hole
+  - preview
   layers:
   - Default
   - TransparentFX

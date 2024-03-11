@@ -12,9 +12,10 @@ public class control : MonoBehaviour
     public GameObject _pathpreview;
     private float speedquotient = 147.47f;//i love 47! excuse me?
     private bool isclick = false;
-    public const float acc_quotient =3f;
-    public const float delta_acc = 0.3f;
+    public const float acc_quotient =1.6f;
+    public const float delta_acc = 0.8f;
     private bool starteddraw = false;
+    public bool isstatic = true;
     Vector2 mousepos;
     Vector2 distance;
     Vector2 playerpos;
@@ -30,6 +31,7 @@ public class control : MonoBehaviour
     public  const float mindis = 15f;
     public GameObject goal_blue;
     public GameObject goal_red;
+    private int can_acc = 0;
     // Start is called before the first frame update
     void Start()
     {
@@ -91,9 +93,9 @@ public class control : MonoBehaviour
                 //这里是为了调试
                 if (starteddraw&&(rb.position-playerpos).sqrMagnitude>mindis*mindis)
                 {//开始之后不在按压状态说明是释放
-                
+                    can_acc = 1;
                     acc = _acc;
-                    Debug.Log(acc);
+
                     _acc = 0f;//赋值acc
                     starteddraw = false;
                     rb.velocity = -(rb.position - playerpos) * speedquotient;
@@ -144,15 +146,25 @@ public class control : MonoBehaviour
         ///acc = acc_init;
         return;
     }
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        //if(collision.tag == "preview"){}
+        //else
+        {   
+            //Debug.Log("collide with "+collision.tag);
+            can_acc = 0;
+        }
+    }
     void Update()
     {    
+        
         //Debug.Log(Input.GetAxis("Mouse ScrollWheel"));
         // 跑出去了就传送回去
         if (rb.position.x > turn_control.borders.x || rb.position.x < -turn_control.borders.x || rb.position.y > turn_control.borders.y || rb.position.y < -turn_control.borders.y)
         {
             transform.position = initialpos;
             rb.velocity = new Vector2(0, 0);
-            turn_control.isstatic[num, (side + 1) / 2] = true;
+            isstatic= true;
         }
         if (turn_control.status == -side) playerpos = transform.position;//初始化playerpos，可能会解决上一回合不松开鼠标造成闪现的bug
         if (turn_control.status == turn_control.NONE)
@@ -162,7 +174,8 @@ public class control : MonoBehaviour
         }
         mousepos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
         if (turn_control.status == side && turn_control.canplay)//判断是否是自己的回合且没有操作过
-        {
+        {   
+            
             drag();
         }
         //下面的代码用来防止超低速运动
@@ -177,23 +190,26 @@ public class control : MonoBehaviour
 
         if (acc > 0.5f)
         {               
-            rb.velocity += new Vector2(-rb.velocity.y, rb.velocity.x) * Time.deltaTime * acc * acc_quotient;
+            rb.velocity += new Vector2(-rb.velocity.y, rb.velocity.x) * Time.deltaTime * acc * acc_quotient ;
             acc -= delta_acc*Time.deltaTime;
+            acc *= can_acc;
         }
         if (acc<-0.5f){
              rb.velocity += new Vector2(-rb.velocity.y, rb.velocity.x) * Time.deltaTime * acc * acc_quotient;
             acc += delta_acc*Time.deltaTime;
+            acc *= can_acc;
         }
+
         //下面的代码实现回合转换 TODO:按照3v3写的,改成5v5之后需要改
         if (rb.velocity.x < 30 && rb.velocity.x > -30 && rb.velocity.y < 30 && rb.velocity.y > -30)
         {
-            turn_control.isstatic[num, (side + 1) / 2] = true;
+            isstatic= true;
             //Debug.Log("player is static");
         }
         else
         {
 
-            turn_control.isstatic[num, (side + 1) / 2] = false;
+            isstatic = false;
             //Debug.Log("player is not static");
         }
         //判断机制：只要出现某方进球的ui就传送回去

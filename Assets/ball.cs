@@ -21,16 +21,16 @@ public class NewBehaviourScript : MonoBehaviour
     void Update()
     {  
         //下面的代码用来防止超低速运动
-        if(rb.velocity.x < 0.3 && rb.velocity.x > -0.3)
+        if(rb.velocity.x < 30 && rb.velocity.x > -30)
         {
             rb.velocity= new Vector2(0,rb.velocity.y);
         }
-        if (rb.velocity.y < 0.3 && rb.velocity.y > -0.3)
+        if (rb.velocity.y < 30 && rb.velocity.y > -30)
         {
             rb.velocity = new Vector2( rb.velocity.x,0);
         }
         //TODO:下面的代码实现回合转换
-        if (rb.velocity.x < 0.3 && rb.velocity.x > -0.3 && rb.velocity.y < 0.3 && rb.velocity.y > -0.3){
+        if (rb.velocity.x < 30 && rb.velocity.x > -30 && rb.velocity.y < 30 && rb.velocity.y > -30){
             //Debug.Log("ball is static");
             turn_control.isstatic[0,0] = true;//球静止
         }else{

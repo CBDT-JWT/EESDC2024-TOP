@@ -16,8 +16,10 @@ public class turn_control : MonoBehaviour
     public static bool checkok = false ;//为true时执行交换回合的检测
     public static bool canplay = false ;//为true时允许玩家操作，为false时双方都不能操作
     public static Vector2 borders = new Vector2(960f, 540f);//场地边界
+    public GameObject [] Players ;
     void Start()
     {   
+        Players = GameObject.FindGameObjectsWithTag("Player");
         isstatic[0,1] = true;//我不知道这行是干什么的，但是删掉就他妈不能交替回合了。
         status = RED;//红方先手
         canplay = true;//红方先手
@@ -29,6 +31,7 @@ public class turn_control : MonoBehaviour
     // Update is called once per frame
     void Update()
     {   
+        
         if (status != NONE&&checkok)//比赛过程中，如果所有球员和球静止，则切换回合。
         {
             
@@ -39,6 +42,12 @@ public class turn_control : MonoBehaviour
             //     {
             //         flag = flag && isstatic[i,j];//检查[i,j]对象是否静止
             // }
+            int playerNum = Players.Length;
+            for (int i = 0; i < playerNum; i++)
+            {
+
+                flag = flag && Players[i].GetComponent<control>().isstatic;//检查球员是否静止
+            }
             flag = flag && isstatic[0,0];//检查球是否静止
         
         if (flag)//所有对象都静止，交替回合//我改成球静止了
@@ -48,15 +57,15 @@ public class turn_control : MonoBehaviour
                 canplay = true;//允许玩家操作
             }
     }
-    if(status == RED){
+    if(status == RED&&canplay){
         red_arrow.SetActive(true);
         blue_arrow.SetActive(false);
     }
-    if(status == BLUE){
+    if(status == BLUE&&canplay){
         red_arrow.SetActive(false);
         blue_arrow.SetActive(true);
     }
-    if(status ==NONE){
+    if(!canplay||status ==NONE){
         red_arrow.SetActive(false);
         blue_arrow.SetActive(false);
     }
