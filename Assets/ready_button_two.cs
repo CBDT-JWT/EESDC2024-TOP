@@ -3,12 +3,12 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class ready_button_two : MonoBehaviour
+public class ReadyButtonTwo : MonoBehaviour
 {
-    public static bool ready=false;
+    public static bool Ready=false;
     
-    private Sprite newSprite;
-    private Button btn;
+    private Sprite _newSprite;
+    private Button _btn;
     public Image image;
 
 
@@ -16,17 +16,17 @@ public class ready_button_two : MonoBehaviour
     void Start()
     {
         image = GetComponent<Image>();
-        btn = GetComponent<Button>();
-        btn.onClick.AddListener(OnButtonClick);
-        newSprite = (Sprite)Resources.Load("prepared", typeof(Sprite));
+        _btn = GetComponent<Button>();
+        _btn.onClick.AddListener(OnButtonClick);
+        _newSprite = (Sprite)Resources.Load("prepared", typeof(Sprite));
     }
 
     private void OnButtonClick(){
-        if(!ready){
-            ready = true;
+        if(!Ready){
+            Ready = true;
             Debug.Log("the second player is ready!");
-            image.sprite = newSprite;
-            btn.interactable = false;
+            image.sprite = _newSprite;
+            _btn.interactable = false;
         }
     }
 

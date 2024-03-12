@@ -1,19 +1,20 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Serialization;
 using UnityEngine.UI;
 using UnityEngine.SocialPlatforms.Impl;
 
-public class trigger_left : MonoBehaviour
+public class TriggerLeft : MonoBehaviour
 {
     public int score = 0;
     public float wait = 1f;
-    public Text score_record;
-    public GameObject goal_red;
+    [FormerlySerializedAs("score_record")] public Text scoreRecord;
+    [FormerlySerializedAs("goal_red")] public GameObject goalRed;
     // Start is called before the first frame update
     void Start()
     {
-        goal_red.SetActive(false);
+        goalRed.SetActive(false);
 
     }
 
@@ -24,7 +25,7 @@ public class trigger_left : MonoBehaviour
     }
     private void Reset()
     {
-        goal_red.SetActive(false);
+        goalRed.SetActive(false);
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
@@ -32,12 +33,12 @@ public class trigger_left : MonoBehaviour
         if(collision.tag == "football")
         {
 
-            turn_control.status = turn_control.NONE;
+            TurnControl.Status = TurnControl.None;
             score++;
-            score_record.text = "score:" + score;
-            goal_red.SetActive(true);
+            scoreRecord.text = "score:" + score;
+            goalRed.SetActive(true);
             Invoke(nameof(Reset), wait);
-            turn_control.just_scored = turn_control.RED;
+            TurnControl.JustScored = TurnControl.Red;
 
         }
     }

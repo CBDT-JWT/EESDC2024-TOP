@@ -8,6 +8,8 @@ TagManager:
   - trigger
   - red hole
   - blue hole
+  - red players
+  - blue players
   layers:
   - Default
   - TransparentFX

@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class pathpreview : MonoBehaviour
+public class Pathpreview : MonoBehaviour
 {
     // Start is called before the first frame update
     public float vx;
@@ -23,13 +23,13 @@ public class pathpreview : MonoBehaviour
     {
         if (acc > 0.5f)
         {
-            rb.velocity += new Vector2(-rb.velocity.y, rb.velocity.x) * Time.deltaTime * acc * control.acc_quotient;
-            acc -= control.delta_acc*Time.deltaTime;
+            rb.velocity += new Vector2(-rb.velocity.y, rb.velocity.x) * Time.deltaTime * acc * Control.AccQuotient;
+            acc -= Control.DeltaAcc*Time.deltaTime;
         }
         
         if (acc<- 0.5f){
-             rb.velocity += new Vector2(-rb.velocity.y, rb.velocity.x) * Time.deltaTime * acc * control.acc_quotient;
-            acc += control.delta_acc*Time.deltaTime;
+             rb.velocity += new Vector2(-rb.velocity.y, rb.velocity.x) * Time.deltaTime * acc * Control.AccQuotient;
+            acc += Control.DeltaAcc*Time.deltaTime;
         }
         
     }

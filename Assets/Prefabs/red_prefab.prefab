@@ -10,11 +10,12 @@ GameObject:
   m_Component:
   - component: {fileID: 1371959988011601862}
   - component: {fileID: 7295485064220373472}
-  - component: {fileID: 558190722917940623}
   - component: {fileID: 6878403865043308320}
+  - component: {fileID: -7595531213622968416}
+  - component: {fileID: -3161511206286938654}
   m_Layer: 0
   m_Name: red_prefab
-  m_TagString: Untagged
+  m_TagString: red players
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -86,19 +87,6 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!114 &558190722917940623
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1814374306034224119}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d0b148fe25e99eb48b9724523833bab1, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_Delegates: []
 --- !u!114 &6878403865043308320
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -111,3 +99,57 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4bcffb836b0824a248964d596223bd22, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &-7595531213622968416
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1814374306034224119}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0dc6fed93d38f4d86969532dbe5af9c7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  index: 0
+  playername: 
+  avartar_path: 
+  skill_index: 0
+  strength: 0
+  speed: 0
+  arc: 0
+--- !u!58 &-3161511206286938654
+CircleCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1814374306034224119}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_ForceSendLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ForceReceiveLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ContactCaptureLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_CallbackLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  serializedVersion: 2
+  m_Radius: 2.58

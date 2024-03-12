@@ -4,27 +4,28 @@ using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SocialPlatforms.Impl;
 using System;
+using UnityEngine.Serialization;
 
 
-public class timetest : MonoBehaviour
+public class Timetest : MonoBehaviour
 {
 
 
     // Start is called before the first frame update
 
-    private Text TimeText;
+    private Text _timeText;
     public float times = 300;
-    private int s;//����һ����
+    private int _s;//����һ����
     public GameObject win;
     public GameObject lose;
     public GameObject draw;
     public GameObject[] star;
-    public trigger_right trigger_right;
-    public trigger_left trigger_left;
+    [FormerlySerializedAs("trigger_right")] public TriggerRight triggerRight;
+    [FormerlySerializedAs("trigger_left")] public TriggerLeft triggerLeft;
 
     void Start()
     {
-        TimeText = GameObject.Find("TimeText").GetComponent<Text>();
+        _timeText = GameObject.Find("TimeText").GetComponent<Text>();
         win.SetActive(false);
         lose.SetActive(false);
         draw.SetActive(false);
@@ -40,11 +41,11 @@ public class timetest : MonoBehaviour
 
     void Update()
     {
-        //��ʱ����ɵ���ʱ�Ĺ��ￄ1�7
+        //��ʱ����ɵ���ʱ�Ĺ��ￄ1�7
         times -= Time.deltaTime;
-        s = (int)times % 60; //С��ת���� 
-        TimeText.text = s.ToString();
-        if (trigger_right.score ==3 || trigger_left.score == 3)
+        _s = (int)times % 60; //С��ת���� 
+        _timeText.text = _s.ToString();
+        if (triggerRight.score ==3 || triggerLeft.score == 3)
         {
             times = 0;
         }
@@ -52,30 +53,30 @@ public class timetest : MonoBehaviour
         {
            
 
-            if (trigger_left.score > trigger_right.score)
+            if (triggerLeft.score > triggerRight.score)
             {
                 lose.SetActive(true);
             }
-            if (trigger_left.score < trigger_right.score)
+            if (triggerLeft.score < triggerRight.score)
             {
                 win.SetActive(true);
             }
-            if (trigger_left.score == trigger_right.score)
+            if (triggerLeft.score == triggerRight.score)
             {
                 draw.SetActive(true);
             }
-            if (trigger_right.score == 1)
+            if (triggerRight.score == 1)
             {
                 star[0].SetActive(true);
 
             }
-            if (trigger_right.score == 2)
+            if (triggerRight.score == 2)
             {
                 star[0].SetActive(true);
                 star[1].SetActive(true);
 
             }
-            if (trigger_right.score == 3)
+            if (triggerRight.score == 3)
             {
                 star[0].SetActive(true);
                 star[1].SetActive(true);
@@ -83,18 +84,18 @@ public class timetest : MonoBehaviour
 
              
             }
-            if (trigger_left.score == 1)
+            if (triggerLeft.score == 1)
             {
                 star[3].SetActive(true);
 
             }
-            if (trigger_left.score == 2)
+            if (triggerLeft.score == 2)
             {
                 star[3].SetActive(true);
                 star[4].SetActive(true);
 
             }
-            if (trigger_left.score == 3)
+            if (triggerLeft.score == 3)
             {
                 star[3].SetActive(true);
                 star[4].SetActive(true);
