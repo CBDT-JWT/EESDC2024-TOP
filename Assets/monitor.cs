@@ -25,6 +25,10 @@ public class Monitor : MonoBehaviour
     private static GameObject obj;
     public static List<OutputPlayer> redOutput = new List<OutputPlayer>();
     public static List<OutputPlayer> blueOutput = new List<OutputPlayer>();
+
+    private const double accuracy = 25.0;
+    
+    private bool ok = true;
     void Start()
     {
         newSpriteRed = (Sprite)Resources.Load("redplayer", typeof(Sprite));
@@ -47,7 +51,7 @@ public class Monitor : MonoBehaviour
             Vector2 nowpos = obj.transform.position;
             foreach (var ahole in Initialize.HolelistRed)
             {
-                if (Vector2.Distance(nowpos, ahole.transform.position) <= 20.0)
+                if (Vector2.Distance(nowpos, ahole.transform.position) <= accuracy)
                 {
                     thishole = ahole;
                     foundhole = true;
@@ -69,6 +73,7 @@ public class Monitor : MonoBehaviour
                 outputPlayer.speed = charasteristic.speed;
                 outputPlayer.arc = charasteristic.arc;
                 thishole.GetComponent<SpriteRenderer>().sprite = newSpriteRed;
+                thishole.GetComponent<SpriteRenderer>().sortingOrder = 4;//new
                 thishole.transform.localScale = new Vector3(26, 26, 0);//选过的hole无法被再次选中
                 DestroyImmediate(obj);
                 Initialize.RedPlayersList.RemoveAll(item => item == null);
@@ -99,7 +104,7 @@ public class Monitor : MonoBehaviour
             Vector2 nowpos = obj.transform.position;
             foreach (var ahole in Initialize.HolelistBlue)
             {
-                if (Vector2.Distance(nowpos, ahole.transform.position) <= 20.0)
+                if (Vector2.Distance(nowpos, ahole.transform.position) <= accuracy)
                 {
                     thishole = ahole;
                     foundhole = true;
@@ -121,6 +126,7 @@ public class Monitor : MonoBehaviour
                 outputPlayer.speed = charasteristic.speed;
                 outputPlayer.arc = charasteristic.arc;
                 thishole.GetComponent<SpriteRenderer>().sprite = newSpriteBlue;
+                thishole.GetComponent<SpriteRenderer>().sortingOrder = 4;//new
                 thishole.transform.localScale = new Vector3(26, 26, 0);//选过的hole无法被再次选中
                 DestroyImmediate(obj);
                 Initialize.BluePlayersList.RemoveAll(item => item == null);
@@ -138,55 +144,4 @@ public class Monitor : MonoBehaviour
         
         
     }
-    /*
-    private void tag()
-    {
-        if (NowDragging > 0)
-        {
-            obj = GameObject.Find("red" + NowDragging.ToString());
-        }
-        else if(NowDragging < 0)
-        {
-            obj = GameObject.Find("blue" + (-NowDragging).ToString());
-        }
-    }
-    private string holenear()
-    {
-        string ret = null;
-        if (obj != null)
-        {
-            Vector2 nowpos = obj.transform.position;
-            foreach (var ahole in Initialize.HolelistRed)
-            {
-                if (Vector2.Distance(nowpos, ahole.transform.position) <= 20.0)
-                {
-                    ret = ahole.name;
-                }
-            }
-        }
-        else
-        {
-            Debug.Log("fault!");
-        }
-
-        return ret;
-    }
-    
-    // Update is called once per frame
-    void Update()
-    {
-        if (NowDragging != 0)
-        {
-            if (!tagged)
-            {
-                tag();
-                tagged = true;
-            }
-            string holename = holenear();
-            if (holename != null)
-            {
-                
-            }
-        }
-    }*/
 }

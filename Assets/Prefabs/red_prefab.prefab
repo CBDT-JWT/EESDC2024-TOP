@@ -75,7 +75,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 1488786023
   m_SortingLayer: -1
-  m_SortingOrder: 3
+  m_SortingOrder: 2
   m_Sprite: {fileID: 21300000, guid: 4bd7583c0e26849d48273fcbcf895956, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -111,13 +111,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0dc6fed93d38f4d86969532dbe5af9c7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  index: 0
-  playername: 
-  avartar_path: 
-  skill_index: 0
-  strength: 0
-  speed: 0
+  playerName: 
+  avatarIndex: 
+  skillIndex: 0
   arc: 0
+  speed: 0
+  strength: 0
+  indexInArray: 0
+  available: 1
 --- !u!58 &-3161511206286938654
 CircleCollider2D:
   m_ObjectHideFlags: 0

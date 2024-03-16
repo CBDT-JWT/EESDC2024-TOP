@@ -12,6 +12,7 @@ public class CustomComponent : MonoBehaviour
     public int speed;
     public int strength;
     public int indexInArray;
+    public bool available = true;
 
     private void OnGUI()
     {

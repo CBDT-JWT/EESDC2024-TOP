@@ -15,6 +15,7 @@ public class Initialize : MonoBehaviour
         public int coins;
         public int[] playersOwned;
     }
+
     [System.Serializable]
     public class Player
     {
@@ -47,6 +48,7 @@ public class Initialize : MonoBehaviour
         public int x5;
         public int y5;
     }
+
     [System.Serializable]
     public class Formationsdata
     {
@@ -64,25 +66,27 @@ public class Initialize : MonoBehaviour
         public int X;
         public int Y;
     }
+
     //预制坐标
-    public static readonly Vector2 LeftposRed = new Vector2(-761, 457);
-    public static readonly Vector2 LeftposBlue = new Vector2(-761, -453);
-    public static readonly int Interval = 150;
+    public static readonly Vector2 LeftposRed = new Vector2(-600, 457);
+    public static readonly Vector2 LeftposBlue = new Vector2(-600, -453);
+    public static readonly int HorizontalInterval = 160;
+    public static readonly int VerticalInterval = 150;
     //
 
 
 
 
-    private int _formationIndexRed = 2;//测试,需要上一个场景传参
+    private int _formationIndexRed = 2; //测试,需要上一个场景传参
     private int _formationIndexBlue = 3;
-    
-    
-    
+
+
+
 
     private string _idOfRed;
     private string _idOfBlue;
     private string[] IDs = new string[2];
-        
+
     private Formation _posRed = new Formation();
     private Formation _posBlue = new Formation();
     public static GameObject[] HolelistRed;
@@ -93,10 +97,10 @@ public class Initialize : MonoBehaviour
     public static List<Player> BluePlayersList = new List<Player>();
     private static int[] _playersRedIndex;
     private static int[] _playersBlueIndex;
-    
-    
-    
-    
+
+
+
+
     void Awake()
     {
         HolelistRed = GameObject.FindGameObjectsWithTag("red hole");
@@ -119,31 +123,23 @@ public class Initialize : MonoBehaviour
 
     private void GetBenches()
     {
-        string path = Application.dataPath + "/playersList.json";//数组越界报错
+        string path = Application.dataPath + "/playersList.json"; //数组越界报错
         if (File.Exists(path))
         {
             string jsonString = System.IO.File.ReadAllText(path);
-            Debug.Log(jsonString);
+            //Debug.Log(jsonString);
             Playersdata myData = JsonUtility.FromJson<Playersdata>(jsonString);
             foreach (var ind in _playersRedIndex)
             {
                 Player tmp = new Player();
-                Debug.Log(ind);
-                Debug.Log(myData.Players[0].playerName);
-                tmp = myData.Players[ind-1];
-                Debug.Log(tmp.playerName);
-                Debug.Log(tmp.avatarIndex);
-                Debug.Log(tmp.skillIndex);
-                Debug.Log(tmp.arc);
-                Debug.Log(tmp.strength);
-                Debug.Log(tmp.speed);
+                tmp = myData.Players[ind - 1];
                 RedPlayersList.Add(tmp);
             }
 
             foreach (var ind in _playersBlueIndex)
             {
                 Player tmp = new Player();
-                tmp = myData.Players[ind-1];
+                tmp = myData.Players[ind - 1];
                 BluePlayersList.Add(tmp);
             }
         }
@@ -151,9 +147,9 @@ public class Initialize : MonoBehaviour
         {
             Debug.Log("path not exist: " + path);
         }
-        
+
     }
-    
+
 
     private Formation Getformationinfo(int index)
     {
@@ -161,12 +157,12 @@ public class Initialize : MonoBehaviour
         if (File.Exists(path))
         {
             string jsonString = System.IO.File.ReadAllText(path);
-            Debug.Log("JSON Data: " + jsonString);
+            //Debug.Log("JSON Data: " + jsonString);
             Formationsdata myData = JsonUtility.FromJson<Formationsdata>(jsonString);
             if (myData.Formations != null && myData.Formations.Length > 0)
             {
                 // 字典不为空
-                return myData.Formations[index-1];
+                return myData.Formations[index - 1];
             }
             else
             {
@@ -179,6 +175,7 @@ public class Initialize : MonoBehaviour
         {
             Debug.Log("path not exist: " + path);
         }
+
         return null;
     }
 
@@ -195,8 +192,10 @@ public class Initialize : MonoBehaviour
         {
             Debug.Log("path not exist: " + path);
         }
+
         return null;
     }
+
     private void Locateholes()
     {
 
@@ -206,124 +205,45 @@ public class Initialize : MonoBehaviour
         HolelistBlue[2].transform.position = new Vector2(_posBlue.x3, _posBlue.y3);
         HolelistBlue[3].transform.position = new Vector2(_posBlue.x4, _posBlue.y4);
         HolelistBlue[4].transform.position = new Vector2(_posBlue.x5, _posBlue.y5);
-        HolelistRed[0].transform.position = new Vector2(-_posRed.x1, -_posRed.y1);//对称性，以蓝方坐标为基准
+        HolelistRed[0].transform.position = new Vector2(-_posRed.x1, -_posRed.y1); //对称性，以蓝方坐标为基准
         HolelistRed[1].transform.position = new Vector2(-_posRed.x2, -_posRed.y2);
         HolelistRed[2].transform.position = new Vector2(-_posRed.x3, -_posRed.y3);
         HolelistRed[3].transform.position = new Vector2(-_posRed.x4, -_posRed.y4);
         HolelistRed[4].transform.position = new Vector2(-_posRed.x5, -_posRed.y5);
-        
+
     }
-    public static string[] GetID(){
+
+    public static string[] GetID()
+    {
         string[] ret = new string[2];
         string path = Path.Combine(Application.dataPath, "Temp", "IDred.id");
-        if(File.Exists(path))
+        if (File.Exists(path))
         {
             using (StreamReader reader = new StreamReader(path))
             {
-                    string currentline = reader.ReadLine();
-                    ret[0] = currentline;
+                string currentline = reader.ReadLine();
+                ret[0] = currentline;
             }
-        }else{
-            Debug.Log("no path:"+path);
         }
+        else
+        {
+            Debug.Log("no path:" + path);
+        }
+
         path = Path.Combine(Application.dataPath, "Temp", "IDblue.id");
-        if(File.Exists(path))
+        if (File.Exists(path))
         {
             using (StreamReader reader = new StreamReader(path))
             {
                 string currentline = reader.ReadLine();
                 ret[1] = currentline;
             }
-        }else{
-            Debug.Log("no path:"+path);
-        }
-        return ret;
-    } 
-    
-    /*
-    public static string Getfileline(string path, int num){
-        string str;
-        using (StreamReader rder = new StreamReader(path)){
-            for(int i=0;i<num-1;i++){
-                rder.ReadLine();
-            }
-            str = rder.ReadLine();
-        }
-        return str;
-    }
-
-
-    public static int Linenums(string filename, string folder)
-    {
-        int ret = 0;
-        string path = Path.Combine(Application.dataPath, folder, filename);
-        if (File.Exists(path))
-        {
-            using (StreamReader reader = new StreamReader(path))
-            {
-                while (reader.ReadLine() != null)
-                {
-                    ret++;
-                }
-            }
         }
         else
         {
-            Debug.Log("no path!");
+            Debug.Log("no path:" + path);
         }
 
         return ret;
     }
-
-    public static List<int> Getinfo(string filename, string folder, int startline){//starline从一开始
-        string path = Path.Combine(Application.dataPath, folder, filename);
-        List<int> retlist = new List<int>();
-        if(File.Exists(path))
-        {
-            using (StreamReader reader = new StreamReader(path))
-            {
-                for (int i = 0; i < startline - 1; i++)
-                {
-                    reader.ReadLine();
-                }
-
-                while (true)
-                {
-                    string currentline = reader.ReadLine();
-                    if(currentline == null) break;
-                    retlist.Add(int.Parse(currentline));
-                }
-            }
-        }else{
-            Debug.Log("no path:"+path);
-        }
-
-        return retlist;
-    }
-    */
-    /*
-    public static List<int> Getinfo(string filename, string folder, int startline, int endline){//starline从一开始
-        string path = Path.Combine(Application.dataPath, folder, filename);
-        List<int> retlist = new List<int>();
-        if(File.Exists(path))
-        {
-            using (StreamReader reader = new StreamReader(path))
-            {
-                for (int i = 0; i < startline - 1; i++)
-                {
-                    reader.ReadLine();
-                }
-
-                for (int i = startline; i < endline + 1; i++)
-                {
-                    string currentline = reader.ReadLine();
-                    retlist.Add(int.Parse(currentline ?? throw new InvalidOperationException()));
-                }
-            }
-        }else{
-            Debug.Log("no path:"+path);
-        }
-
-        return retlist;
-    }*/
 }

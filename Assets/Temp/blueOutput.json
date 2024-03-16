@@ -1,0 +1,52 @@
+[
+  {
+    "x": 190,
+    "y": 0,
+    "playerName": "Messi",
+    "avatarIndex": "2.png",
+    "skillIndex": 1,
+    "arc": 90,
+    "speed": 80,
+    "strength": 80
+  },
+  {
+    "x": 350,
+    "y": 240,
+    "playerName": "Müller",
+    "avatarIndex": "7.png",
+    "skillIndex": 6,
+    "arc": 85,
+    "speed": 80,
+    "strength": 75
+  },
+  {
+    "x": 475,
+    "y": 0,
+    "playerName": "van Dijk",
+    "avatarIndex": "5.png",
+    "skillIndex": 4,
+    "arc": 55,
+    "speed": 80,
+    "strength": 95
+  },
+  {
+    "x": 350,
+    "y": -240,
+    "playerName": "Akinfenwa",
+    "avatarIndex": "8.png",
+    "skillIndex": 2,
+    "arc": 50,
+    "speed": 60,
+    "strength": 100
+  },
+  {
+    "x": 730,
+    "y": 0,
+    "playerName": "Cristiano",
+    "avatarIndex": "1.png",
+    "skillIndex": 2,
+    "arc": 75,
+    "speed": 80,
+    "strength": 87
+  }
+]

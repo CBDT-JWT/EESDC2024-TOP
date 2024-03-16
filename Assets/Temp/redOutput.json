@@ -1,0 +1,52 @@
+[
+  {
+    "x": -200,
+    "y": 0,
+    "playerName": "Cristiano",
+    "avatarIndex": "1.png",
+    "skillIndex": 2,
+    "arc": 75,
+    "speed": 80,
+    "strength": 87
+  },
+  {
+    "x": -580,
+    "y": 300,
+    "playerName": "Messi",
+    "avatarIndex": "2.png",
+    "skillIndex": 1,
+    "arc": 90,
+    "speed": 80,
+    "strength": 80
+  },
+  {
+    "x": -720,
+    "y": 105,
+    "playerName": "Haland",
+    "avatarIndex": "3.png",
+    "skillIndex": 3,
+    "arc": 55,
+    "speed": 90,
+    "strength": 90
+  },
+  {
+    "x": -720,
+    "y": -105,
+    "playerName": "Robben",
+    "avatarIndex": "4.png",
+    "skillIndex": 2,
+    "arc": 75,
+    "speed": 95,
+    "strength": 75
+  },
+  {
+    "x": -580,
+    "y": -300,
+    "playerName": "van Dijk",
+    "avatarIndex": "5.png",
+    "skillIndex": 4,
+    "arc": 55,
+    "speed": 80,
+    "strength": 95
+  }
+]

@@ -27,12 +27,14 @@ public class BlueDragger : MonoBehaviour
         //Getindex();
         _offset = new Vector2(Camera.main.ScreenToWorldPoint(Input.mousePosition).x,Camera.main.ScreenToWorldPoint(Input.mousePosition).y) - _initpos;
         _isdrag = true;
+        this.GetComponent<SpriteRenderer>().sortingOrder = 5;
         Monitor.NowDragging = _chara.indexInArray;
         Debug.Log("indexinray:"+_chara.indexInArray);
     }
 
     private void OnMouseUp()
     {
+        this.GetComponent<SpriteRenderer>().sortingOrder = 2;
         Monitor.BlueMotion(_initpos);
         Monitor.NowDragging = 0;
     }
